@@ -12,16 +12,18 @@ class Main {
 
         Node node = new Node(n);
         node.left = new Node(4);
-        node.left.left = new Node(2);
+        node.left.right = new Node(2);
+        node.left.left = new Node(34);
         node.right = new Node(5);
+        node.right.left = new Node(33);
 
         System.out.println("Меню:" +
                 "\n1 - Добавить рандомный элемент слева" +
-                "\n2 - Вывести бинарное дерево слева-направо" +
-                "\n3 - Вывести бинарное дерево справа-налево" +
-                "\n4 - Узнать высоту дерева" +
-                "\n5 - Найти среднее арифмитическое дерева" +
-                "\n6 - Узнать количество ребер дерева");
+                "\n2 - Вывести бинарное дерево" +
+                "\n3 - Узнать высоту дерева" +
+                "\n4 - Найти среднее арифмитическое дерева" +
+                "\n5 - Узнать количество ребер дерева");
+
         while (true) {
             System.out.print("Номер: ");
             int num = in.nextInt();
@@ -30,23 +32,20 @@ class Main {
                     node.add(node);
                     break;
                 case 2:
-                    node.outputLeft(node);
+                    node.output(node, 0);
                     break;
                 case 3:
-                    node.outputRight(node);
-                case 4:
                     System.out.println("Высота дерева: " + node.highTree(node));
                     break;
-                case 5:
+                case 4:
                     System.out.println("Среднее арифметическое: " + (node.calcKey(node) / node.count(node)));
                     break;
-                case 6:
+                case 5:
                     System.out.println("Количество ребер: " + node.count(node));
                     break;
                 default:
                     break;
             }
-
         }
     }
 }
@@ -62,19 +61,13 @@ class Node {
         this.right = null;
     }
 
-    void outputLeft(Node node) { //in-order
+    void output(Node node, int l) {
         if (node != null) {
-            outputLeft(node.left);
-            System.out.println(node.key);
-            outputLeft(node.right);
-        }
-    }
-
-    void outputRight(Node node) { //in-order
-        if (node != null) {
-            outputRight(node.right);
-            System.out.println(node.key);
-            outputRight(node.left);
+            output(node.right, l+1);
+            for (int i = 1; i <= l; i ++)
+                System.out.print("  ");
+            System.out.print(node.key + "\n");
+            output(node.left, l+1);
         }
     }
 
