@@ -1,4 +1,4 @@
-package ru.luckoff.siaod_3;
+package ru.luckoff.BinaryTree;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -94,7 +94,7 @@ class Node {
         }
     }
 
-    int calcKey(Node node) {
+    int calcKey(Node node) { //sum
         if (node != null) {
             return calcKey(node.left) + calcKey(node.right) + node.key;
         } else {
